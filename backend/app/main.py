@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from app.api.v1.health import router as health_router
 from app.core.config import settings
 
+from app.api.v1.documents import router as documents_router
+
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
@@ -14,6 +16,7 @@ app.include_router(
     prefix="/api/v1",
 )
 
+app.include_router(documents_router, prefix="/api/v1")
 
 @app.get("/")
 def root() -> dict[str, str]:
